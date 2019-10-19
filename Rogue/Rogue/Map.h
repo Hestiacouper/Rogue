@@ -8,7 +8,7 @@ public:
 
 	Map();
 	int CheckTile(int posX, int posY);
-	void PlacePlayer(int posX, int posY);
+	void PlacePlayer(int posX, int posY, int newPosX, int newPosY);
 	void PrintMap();
 
 private:

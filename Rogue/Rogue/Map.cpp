@@ -52,11 +52,10 @@ int Map::CheckTile(int posX, int posY)
 	}
 }
 
-void Map::PlacePlayer(int posX, int posY)
+void Map::PlacePlayer(int posX, int posY, int newPosX, int newPosY)
 {
-	map[posX][posY] = playerChar;
-	std::cout << "work?" << std::endl;
-	std::cout << map[posX][posY] << std::endl;
+	map[posX][posY] = ground;
+	map[newPosX][newPosY] = playerChar;
 }
 
 
