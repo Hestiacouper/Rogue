@@ -10,6 +10,8 @@ public:
 	int posY;
 	int newPosX;
 	int newPosY;
+	int oldPosX;
+	int oldPosY;
 
 private:
 	char UserInput;

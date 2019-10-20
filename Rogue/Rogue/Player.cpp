@@ -41,6 +41,8 @@ void Player::MovePlayer(int obstacle)
 		{
 			std::cout << "Debug posX " << posX << "Debug newPosX " << newPosX << "\n";
 			std::cout << "Debug posX " << posY << "Debug newPosX " << newPosY << "\n";
+			oldPosX = posX;
+			oldPosY = posY;
 			posX = newPosX;
 			posY = newPosY;
 			break;
@@ -49,6 +51,8 @@ void Player::MovePlayer(int obstacle)
 		case 2:
 		{
 			std::cout << "You can't moove in a wall!\n";
+			oldPosX = posX;
+			oldPosY = posY;
 			newPosX = posX;
 			newPosY = posY;
 			break;
@@ -57,6 +61,8 @@ void Player::MovePlayer(int obstacle)
 		case 3:
 		{
 			std::cout << "Debug pot\n";
+			oldPosX = posX;
+			oldPosY = posY;
 			posX = newPosX;
 			posY = newPosY;
 			break;
@@ -66,6 +72,8 @@ void Player::MovePlayer(int obstacle)
 			//else if(obstacle==4)
 		{
 			std::cout << "Debug trap\n";
+			oldPosX = posX;
+			oldPosY = posY;
 			posX = newPosX;
 			posY = newPosY;
 			break;
