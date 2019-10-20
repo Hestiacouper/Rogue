@@ -2,7 +2,7 @@
 #include "Map.h"
 #include <iostream>
 #include <fstream>
-
+#include "Potion.h"
 
 Map::Map()
 {
@@ -28,26 +28,21 @@ Map::Map()
 
 int Map::CheckTile(int posX, int posY)
 {
-	//std::cout << "Map pos = " << map[posX][posY] << "guess so";
 	if(map[posX][posY]==' ')
 	{
-		std::cout << "ground\n";
 		return 1;
 	} 
 	if (map[posX][posY] == borderHorizontalDown || map[posX][posY] == borderHorizontalTop || map[posX][posY] == borderVertical)
 	{
-		std::cout << "walls\n";
 		return 2;
 	}
 	if(map[posX][posY] == potionChar)
 	{
-		std::cout << "potions\n";
 		//If code works is used when called in Game.cpp run with player's current pos let player knows a potion is there. If used when looking if can moove, should let player moove.
 		return 3;
 	}
 	if (map[posX][posY] == trapChar)
 	{
-		std::cout << "trap\n";
 		//Same but with traps
 		return 4;
 	}
@@ -60,17 +55,25 @@ void Map::PlacePlayer(int posX, int posY, int newPosX, int newPosY)
 	map[newPosX][newPosY] = playerChar;
 }
 
-
-
-
-
-
-
-
-
+void Map::PlacePotions(int posX, int posY, bool taken)
+{
+	if(!taken)
+	{
+		map[posX][posY] = potionChar;
+	}
+	else
+	{
+		map[posX][posY] = ground;
+	}
+}
+void Map::PlaceTraps(int posX, int posY)
+{
+	map[posX][posY] = trapChar;
+}
 
 void Map::PrintMap()
 {
+	system("cls");
 	for (unsigned int i = 0; i < map.size(); i++)
 	{
 		for (unsigned int j = 0; j < map[i].size(); j++)

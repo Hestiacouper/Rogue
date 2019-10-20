@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Player.h"
 #include <iostream>
+#include "Potion.h"
+#include "Traps.h"
 
 Player::Player()
 {
@@ -8,6 +10,7 @@ Player::Player()
 	posY = 1;
 	newPosX = posX;
 	newPosY = posY;
+	playerHealth = 10;
 }
 
 void Player::PlayerAction()
@@ -15,7 +18,6 @@ void Player::PlayerAction()
 	std::cin >> UserInput;
 	if(UserInput=='d')
 	{
-		std::cout << "Player entered D\n";
 		newPosY = posY + 1;
 	}
 	else if(UserInput=='a')
@@ -30,58 +32,62 @@ void Player::PlayerAction()
 	{
 		newPosX = posX - 1;
 	}
+	else if (UserInput == 'f')
+	{
+		if (playerPots > 0)
+		{
+			PlayerHealed(Potion::healValue);
+			playerPots -= 1;
+		}
+		else
+		{
+			std::cout << "You have no potions";
+		}
+	}
 }
 
 void Player::MovePlayer(int obstacle)
 {
-	switch (obstacle)//if(obstacle==1)
+	switch (obstacle)
 	{
-
 		case 1:
-		{
-			std::cout << "Debug posX " << posX << "Debug newPosX " << newPosX << "\n";
-			std::cout << "Debug posX " << posY << "Debug newPosX " << newPosY << "\n";
+		{	
 			oldPosX = posX;
 			oldPosY = posY;
 			posX = newPosX;
 			posY = newPosY;
 			break;
 		}
-		//else if (obstacle == 2)
 		case 2:
 		{
-			std::cout << "You can't moove in a wall!\n";
 			oldPosX = posX;
 			oldPosY = posY;
 			newPosX = posX;
 			newPosY = posY;
 			break;
 		}
-		//else if (obstacle == 3)
 		case 3:
 		{
-			std::cout << "Debug pot\n";
 			oldPosX = posX;
 			oldPosY = posY;
 			posX = newPosX;
 			posY = newPosY;
+			std::cout << "Do you want to pick up the potion? Press e to do so\n";
+			std::cin >> UserInput;
+			if(UserInput=='e')
+			{
+				playerPots += 1;
+			}
 			break;
-			//Gotta add heal later
 		}
 		case 4:
-			//else if(obstacle==4)
 		{
-			std::cout << "Debug trap\n";
 			oldPosX = posX;
 			oldPosY = posY;
 			posX = newPosX;
 			posY = newPosY;
+			PlayerTakeDamage(Traps::damages);
 			break;
-			//Gotta add take damage later
-		}
-		default:
-		{
-			std::cout << "WHY?";
 		}
 	}
 }
@@ -89,9 +95,32 @@ void Player::MovePlayer(int obstacle)
 void Player::PrintPlayerInfo()
 {
 	std::cout << "Player Pos X= " << newPosX << " Pos Y= " << newPosY << "\n";
-
+	std::cout << "Player Health is  " << playerHealth << std::endl;
+	std::cout << "Player has " << playerPots << " potions\n";
+	std::cout << "Controls are WASD to moove, e to pick up, f to drink potions\n";
 }
 
+void Player::PlayerTakeDamage(int damage)
+{
+	playerHealth -= damage;
+}
+
+void Player::PlayerHealed(int heal)
+{
+	playerHealth += heal;
+}
+
+bool Player::IsPlayerAlive()
+{
+	if(playerHealth<=0)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
 
 
 

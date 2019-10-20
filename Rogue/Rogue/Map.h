@@ -10,7 +10,10 @@ public:
 	int CheckTile(int posX, int posY);
 	void PlacePlayer(int posX, int posY, int newPosX, int newPosY);
 	void PrintMap();
-
+	void PlacePotions(int posX, int posY, bool taken);
+	void PlaceTraps(int posX, int posY);
+	static const int map_height = 20;
+	static const int map_width = 20;
 private:
 	char ground = char(' ');
 	char borderHorizontalTop = char(223);
@@ -19,7 +22,5 @@ private:
 	char potionChar = char('O');
 	char trapChar = char('H');
 	char playerChar = char('@');
-	int map_height = 20;
-	int map_width = 20;
 	std::vector<std::vector<char>> map;
 };
