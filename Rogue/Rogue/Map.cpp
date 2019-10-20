@@ -28,28 +28,30 @@ Map::Map()
 
 int Map::CheckTile(int posX, int posY)
 {
-	if(map[posX][posY]==ground)
+	//std::cout << "Map pos = " << map[posX][posY] << "guess so";
+	if(map[posX][posY]==' ')
 	{
+		std::cout << "ground\n";
 		return 1;
 	} 
-	if (map[posX][posY] == borderHorizontalDown, map[posX][posY] == borderHorizontalTop, map[posX][posY] == borderVertical)
+	if (map[posX][posY] == borderHorizontalDown || map[posX][posY] == borderHorizontalTop || map[posX][posY] == borderVertical)
 	{
+		std::cout << "walls\n";
 		return 2;
 	}
 	if(map[posX][posY] == potionChar)
 	{
+		std::cout << "potions\n";
 		//If code works is used when called in Game.cpp run with player's current pos let player knows a potion is there. If used when looking if can moove, should let player moove.
 		return 3;
 	}
 	if (map[posX][posY] == trapChar)
 	{
+		std::cout << "trap\n";
 		//Same but with traps
 		return 4;
 	}
-	else
-	{
-		return 0;
-	}
+
 }
 
 void Map::PlacePlayer(int posX, int posY, int newPosX, int newPosY)
